@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MediaItemComponentComponent } from './media-item-component.component';
+import { MediaItemComponent } from './media-item.component';
 
-describe('MediaItemComponentComponent', () => {
-  let component: MediaItemComponentComponent;
-  let fixture: ComponentFixture<MediaItemComponentComponent>;
+describe('MediaItemComponent', () => {
+  let component: MediaItemComponent;
+  let fixture: ComponentFixture<MediaItemComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediaItemComponentComponent ]
+      declarations: [ MediaItemComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MediaItemComponentComponent);
+    fixture = TestBed.createComponent(MediaItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
