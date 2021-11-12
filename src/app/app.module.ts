@@ -15,6 +15,11 @@ import { FavoriteDirective } from './services/favorite.directive';
 // code services
 //import { MediaItemService } from './services/media-item.service';
 
+// global items
+const lookupLists = {
+  mediums: ['Movies', 'Series']
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +36,7 @@ import { FavoriteDirective } from './services/favorite.directive';
   ],
   providers: [
     //MediaItemService
+    {provide: 'lookupListToken', useValue: lookupLists}
   ],
   bootstrap: [AppComponent]
 })
