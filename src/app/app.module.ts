@@ -9,10 +9,15 @@ import { AppComponent } from './app.component';
 import { MediaItemListComponent } from './media-item-list/media-item-list.component';
 import { MediaItemFormComponent } from './media-item-form/media-item-form.component';
 import { MediaItemComponent } from './media-item/media-item.component';
-
-// code services
 import { CategoryListPipe } from './services/category-list.pipe';
 import { FavoriteDirective } from './services/favorite.directive';
+
+// code services
+//import { MediaItemService } from './services/media-item.service';
+import { lookupLists, lookupListToken } from './services/providers';
+
+
+
 
 @NgModule({
   declarations: [
@@ -28,7 +33,10 @@ import { FavoriteDirective } from './services/favorite.directive';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    //MediaItemService
+    {provide: lookupListToken, useValue: lookupLists}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
