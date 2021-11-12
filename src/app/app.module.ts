@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule, HttpXhrBackend } from '@angular/common/http';
 
 
 // code components
@@ -15,7 +16,7 @@ import { FavoriteDirective } from './services/favorite.directive';
 // code services
 //import { MediaItemService } from './services/media-item.service';
 import { lookupLists, lookupListToken } from './services/providers';
-
+import { MockXHRBackend } from './services/mock-xhr-backend';
 
 
 
@@ -31,11 +32,13 @@ import { lookupLists, lookupListToken } from './services/providers';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     //MediaItemService
-    {provide: lookupListToken, useValue: lookupLists}
+    {provide: lookupListToken, useValue: lookupLists},
+    {provide: HttpXhrBackend, useClass: MockXHRBackend}
   ],
   bootstrap: [AppComponent]
 })
