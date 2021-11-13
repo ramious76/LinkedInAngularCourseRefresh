@@ -1,3 +1,5 @@
+# Stopping course at chapter 6 for alot of jumping around and inserting large amounts of code without discussion.  Moving to a more comprehensive course.
+
 # LinkedInCourse
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
