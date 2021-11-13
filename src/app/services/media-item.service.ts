@@ -1,57 +1,23 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 @Injectable({
     providedIn: "root"    //this provides injection for all app using the root keyword  
 })                        //also removes need for providers registration in app.module.ts
 export class MediaItemService {
+    mediaItems;
+    constructor(private http: HttpClient) { }
 
-    mediaItems = [
-        {
-          id: 1,
-          name: 'Firebug',
-          medium: 'Series',
-          category: 'Science Fiction',
-          year: 2010,
-          watchedOn: 1294166565384,
-          isFavorite: false
-        },
-        {
-          id: 2,
-          name: 'The Small Tall',
-          medium: 'Movies',
-          category: 'Comedy',
-          year: 2015,
-          watchedOn: null,
-          isFavorite: true
-        }, {
-          id: 3,
-          name: 'The Redemption',
-          medium: 'Movies',
-          category: 'Action',
-          year: 2016,
-          watchedOn: null,
-          isFavorite: false
-        }, {
-          id: 4,
-          name: 'Hoopers',
-          medium: 'Series',
-          category: 'Drama',
-          year: null,
-          watchedOn: null,
-          isFavorite: true
-        }, {
-          id: 5,
-          name: 'Happy Joe: Cheery Road',
-          medium: 'Movies',
-          category: 'Action',
-          year: 2015,
-          watchedOn: 1457166565384,
-          isFavorite: false
-        }
-      ];
-
-      get() {
-        return this.mediaItems;
+      get(medium) {
+        const getOptions = {
+            params: { medium }  //since medium is both the type and param name, we can use it directly  instead of medium: medium
+        };
+        return this.http.get<MediaItemResponse>('mediaitems', getOptions)
+        .pipe(map((response: MediaItemResponse) => {
+            return response.mediaItems;
+        })
+        );
       }
       add(mediaItem) {
         this.mediaItems.push(mediaItem);
@@ -63,4 +29,18 @@ export class MediaItemService {
           this.mediaItems.splice(index, 1);
         }
       }
+}
+
+interface MediaItem {
+    id: number;
+    name: string;
+    medium: string;
+    category: string;
+    year: number;
+    watchedOn: number;
+    isFavorite: boolean;
+}
+
+interface MediaItemResponse {
+    mediaItems: MediaItem[];
 }

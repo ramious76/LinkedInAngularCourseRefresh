@@ -7,6 +7,7 @@ import { MediaItemService } from '../services/media-item.service';
   styleUrls: ['./media-item-list.component.scss']
 })
 export class MediaItemListComponent implements OnInit {
+  medium = '';
   mediaItems;
   /**
    *
@@ -16,10 +17,18 @@ export class MediaItemListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.mediaItems = this.mediaItemService.get();
+    this.getMediaItems(this.medium);
   }
 
   onMediaItemDelete(mediaItem) {
     this.mediaItemService.delete(mediaItem);
+  }
+
+  getMediaItems(medium: string){
+    this.medium = medium;
+    this.mediaItemService.get(this.medium)
+    .subscribe(mediaItems => {
+      this.mediaItems = mediaItems;
+    });
   }
 }
