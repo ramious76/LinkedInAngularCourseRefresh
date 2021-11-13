@@ -9,9 +9,15 @@ export class MediaItemService {
     mediaItems;
     constructor(private http: HttpClient) { }
 
-      get() {
-        return this.http.get<MediaItemResponse>('mediaitems')
-        .pipe(map(response => { return response.mediaItems;}));
+      get(medium) {
+        const getOptions = {
+            params: { medium }  //since medium is both the type and param name, we can use it directly  instead of medium: medium
+        };
+        return this.http.get<MediaItemResponse>('mediaitems', getOptions)
+        .pipe(map((response: MediaItemResponse) => {
+            return response.mediaItems;
+        })
+        );
       }
       add(mediaItem) {
         this.mediaItems.push(mediaItem);
